@@ -1,62 +1,23 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {SignUpComponent} from "./component/SignUp";
-
-/**
- * @return {string}
+/*
+ * @Author: Kingtous
+ * @Date: 2020-02-18 10:38:44
+ * @LastEditors: Kingtous
+ * @LastEditTime: 2020-02-18 11:00:53
+ * @Description: Kingtous' Code
  */
-function FormatTime(props) {
-    return props.time.toLocaleString();
-}
+import React from 'react';
+import "./css/App.css";
+import MyRoute from "./router/Router.js";
 
-function onBtnClick() {
-    alert("你点击了按钮");
-}
+export default class App extends React.Component {
 
-class Clock extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {date: new Date()};
-    }
-
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.updateTime(), 1000
-        );
-    }
-
-    updateTime() {
-        this.setState(
-            {date: new Date()}
-        );
-    }
-
-    componentWillMount() {
-        clearInterval(this.timerID);
-    }
-
-
+    // 定义路由
     render() {
         return (
-            <div>
-                现在时间：<FormatTime time={this.state.date}/>
+            <div className="App">
+                <MyRoute/>
             </div>
         );
-    }
-}
+    };
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <SignUpComponent/>
-                <Clock/>
-            </header>
-        </div>
-    );
 }
-
-export default App;

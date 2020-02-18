@@ -3,14 +3,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 function Copyright() {
@@ -26,7 +24,7 @@ function Copyright() {
     );
 }
 
-class SignUpComponent extends React.Component{
+class SignUpComponent extends React.Component {
 
     classes = makeStyles(theme => ({
         paper: {
@@ -50,28 +48,28 @@ class SignUpComponent extends React.Component{
     username;
     password;
 
-    onUserNameChanged(e){
+    onUserNameChanged(e) {
         this.username = e.target.value;
     }
 
-    onPasswordChanged(e){
+    onPasswordChanged(e) {
         this.password = e.target.value;
     }
 
-    submit(){
-        let body = {"username":this.username,"password":this.password};
+    submit() {
+        let body = {"username": this.username, "password": this.password};
         let initHeader = new Headers();
-        initHeader.append('Content-Type','application/json');
+        initHeader.append('Content-Type', 'application/json');
         body = JSON.stringify(body);
         const init = {
             method: 'POST',
             headers: initHeader,
             body
         };
-        fetch("http://127.0.0.1:5000/auth/register",init)
+        fetch("http://127.0.0.1:5000/auth/register", init)
             .then(res => res.json())
             .then(data => {
-                if (data.code == 0){
+                if (data.code == 0) {
                     alert(data.data.username);
                 } else {
                     alert("存在同名用户了");
@@ -82,10 +80,10 @@ class SignUpComponent extends React.Component{
     render() {
         return (
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <div className={this.classes.paper}>
                     <Avatar className={this.classes.avatar}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Coder注册
@@ -102,7 +100,7 @@ class SignUpComponent extends React.Component{
                                     id="username"
                                     label="用户名"
                                     autoFocus
-                                    onChange={(e)=>this.onUserNameChanged(e)}
+                                    onChange={(e) => this.onUserNameChanged(e)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -114,7 +112,7 @@ class SignUpComponent extends React.Component{
                                     label="密码"
                                     name="password"
                                     autoComplete="current-password"
-                                    onChange={(e)=>this.onPasswordChanged(e)}
+                                    onChange={(e) => this.onPasswordChanged(e)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -136,7 +134,7 @@ class SignUpComponent extends React.Component{
                             variant="contained"
                             color="primary"
                             className={this.classes.submit}
-                            onClick={(e)=>{
+                            onClick={(e) => {
                                 this.submit();
                                 return false;
                             }}
@@ -153,7 +151,7 @@ class SignUpComponent extends React.Component{
                     </form>
                 </div>
                 <Box mt={5}>
-                    <Copyright />
+                    <Copyright/>
                 </Box>
             </Container>
         );
@@ -161,4 +159,4 @@ class SignUpComponent extends React.Component{
 
 }
 
-export {SignUpComponent,Copyright};
+export {SignUpComponent, Copyright};
