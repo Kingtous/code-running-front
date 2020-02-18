@@ -2,25 +2,26 @@
 // Date：2020/2/18
 // Description：
 
-import React, {Fragment} from "react";
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import React from "react";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import IndexPage from "../page/business";
 import RegisterPage from "../page/business/register";
 import LoginPage from "../page/business/login";
+import {CssBaseline} from "@material-ui/core";
 
-const MyRoute = () => {
+export default function MyRoute() {
     // 定义路由
     return (
         <Router>
-            <Fragment>
-                <Link to="/user/login"> 开始</Link>
-            </Fragment>
-            <Route exact path="/" Component={IndexPage}/>
-            <Route path="/user/login" Component={LoginPage}/>
-            <Route path="/user/register" Component={RegisterPage}/>
+            <div>
+                <CssBaseline/>
+                <Switch>
+                    <Route exact path="/"><IndexPage/></Route>
+                    <Route path="/user/login"><LoginPage/></Route>
+                    <Route path="/user/register"><RegisterPage/></Route>
+                </Switch>
+            </div>
         </Router>
     );
 };
-
-export default MyRoute;
