@@ -7,12 +7,13 @@
  */
 import React from "react";
 import {checkIsLogin} from "../../action/LoginUtil";
-import {Container, Paper} from "@material-ui/core";
+import {Container, Paper, Button} from "@material-ui/core";
 import CodeToolBar from "../../component/layout/ToolBar";
 // 背景图
 import BackGround from "../../images/main_bg.jpg";
 import Grid from "@material-ui/core/Grid";
 import {SignUpComponent} from "../../component/layout/SignUp";
+import {withRouter} from "react-router-dom";
 
 const backGroundStyle = {
     width: "100%",
@@ -20,7 +21,7 @@ const backGroundStyle = {
     backgroundImage: `url(${BackGround})`
 };
 
-export default class IndexPage extends React.Component {
+class IndexPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -48,10 +49,17 @@ export default class IndexPage extends React.Component {
                             justify="center"
                             style={{minHeight: '100vh'}}
                         >
-                            <Grid item xs={8}>
-                                <Paper elevation={3}>
-                                    <SignUpComponent/>
-                                </Paper>
+                            <Grid item xs={12}>
+                              
+                                    <div align="center">
+                                    <Button href={this.state.isLogin?"/user/dashboard":"/user/login"}
+                                        color={"primary"}
+                                    >
+                                        开启旅程
+                                    </Button>
+                                    </div>
+                                   
+                             
                             </Grid>
                         </Grid>
 
@@ -62,3 +70,5 @@ export default class IndexPage extends React.Component {
         );
     }
 }
+
+export default withRouter(IndexPage);

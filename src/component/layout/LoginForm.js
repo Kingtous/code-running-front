@@ -10,7 +10,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { red } from '@material-ui/core/colors';
 import { saveToken } from '../../action/LoginUtil';
-import { register_url } from '../../static/HttpConstant';
+import { auth_url, getErrMessage } from '../../static/HttpConstant';
+import {withRouter} from "react-router-dom";
 
 function Copyright() {
     return (
@@ -25,7 +26,7 @@ function Copyright() {
     );
 }
 
-class SignUpComponent extends React.Component {
+class LoginForm extends React.Component {
 
     classes = makeStyles(theme => ({
         paper: {
@@ -47,9 +48,7 @@ class SignUpComponent extends React.Component {
 
     constructor(){
         super();
-        this.state = {
-            isSame:true
-        }
+       
     }
 
     onUserNameChanged(e) {
@@ -70,29 +69,17 @@ class SignUpComponent extends React.Component {
             headers: initHeader,
             body
         };
-        fetch(register_url, init)
+        fetch(auth_url, init)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (data.code == 0) {
                     saveToken(data);
+                    this.props.history.push("/user/dashboard");
                 } else {
-                    alert("存在同名用户了");
+                   getErrMessage(data.code);
                 }
             })
-    }
-
-    onRepeatPassword(event){
-            // 密码两遍不对
-            if(event.target.value == this.password){
-                this.setState({
-                    isSame : true
-                });
-            } else {
-                this.setState({
-                    isSame:false
-                })
-            }
-            
     }
 
     render() {
@@ -101,10 +88,10 @@ class SignUpComponent extends React.Component {
                 <CssBaseline/>
                 <div className={this.classes.paper}>
                 <div align="center" style={{marginBottom:"10px"}}>
-                <i class="fa fa-user-plus fa-2x" aria-hidden="true" align="center"></i> 
+                <i class="fa fa-user fa-2x" aria-hidden="true" align="center"></i> 
                 </div>
                     <Typography component="h1" variant="h5" style={{textAlign: "center"}}>
-                        Coder注册
+                        Coder登录
                     </Typography>
                     <Container style={{padding: "8px"}}>
                         <form className={this.classes.form} noValidate onSubmit={false}>
@@ -135,24 +122,7 @@ class SignUpComponent extends React.Component {
                                         onChange={(e) => this.onPasswordChanged(e)}
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        name="rpassword"
-                                        label="再次输入密码"
-                                        type="password"
-                                        id="rpassword"
-                                        autoComplete="current-password"
-                                        onChange={(e)=>this.onRepeatPassword(e)}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <p align="right" style={{color:"red"}}
-                                    hidden={this.state.isSame}
-                                    > 两次密码不一致 </p>
-                                </Grid>
+                            
                             </Grid>
                             <Button
                                 type="button"
@@ -166,12 +136,12 @@ class SignUpComponent extends React.Component {
                                     return false;
                                 }}
                             >
-                                注册
+                                登录
                             </Button>
                             <Grid container justify="flex-end">
                                 <Grid item>
-                                    <Link href="/user/login" variant="body2">
-                                        已经有账号了？立即登录
+                                    <Link href="/user/register" variant="body2">
+                                        没有账号了？点此注册
                                     </Link>
                                 </Grid>
                             </Grid>
@@ -185,7 +155,7 @@ class SignUpComponent extends React.Component {
             </Container>
         );
     }
-
+    
 }
 
-export {SignUpComponent, Copyright};
+export default withRouter(LoginForm);

@@ -10,7 +10,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Menu} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {checkIsLogin} from "../../action/LoginUtil";
+import {checkIsLogin, getUserCache} from "../../action/LoginUtil";
 
 
 export default class CodeToolBar extends Component {
@@ -30,14 +30,18 @@ export default class CodeToolBar extends Component {
     constructor(prop) {
         super(prop);
         this.state = {
-            isLogined: false
+            isLogined: false,
+            username : null
         }
     }
 
     componentDidMount() {
-        this.setState({
-            isLogined: checkIsLogin()
-        });
+        if (checkIsLogin()) {
+            this.setState({
+                isLogined: true,
+                username : getUserCache().username
+            });
+        }
     }
 
     render() {
@@ -51,7 +55,10 @@ export default class CodeToolBar extends Component {
                         Coder Community
                     </Typography>
                     <Box justifyContent={"flex-end"}>
-                        <Button color="inherit">登录</Button>
+                        <Button color="inherit" href={this.state.username==null?
+                        "/user/login":"/user/dashboard"}>
+                         {this.state.username==null?"登录":this.state.username}
+                        </Button>
                     </Box>
                 </Toolbar>
             </AppBar>

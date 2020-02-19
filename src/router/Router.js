@@ -9,6 +9,7 @@ import IndexPage from "../page/business";
 import RegisterPage from "../page/business/register";
 import LoginPage from "../page/business/login";
 import {CssBaseline} from "@material-ui/core";
+import { Dashboard } from "@material-ui/icons";
 
 export default function MyRoute() {
     // 定义路由
@@ -20,6 +21,7 @@ export default function MyRoute() {
                     <Route exact path="/"><IndexPage/></Route>
                     <Route path="/user/login"><LoginPage/></Route>
                     <Route path="/user/register"><RegisterPage/></Route>
+                    <Route path="/user/dashboard"><Dashboard/></Route>
                 </Switch>
             </div>
         </Router>
