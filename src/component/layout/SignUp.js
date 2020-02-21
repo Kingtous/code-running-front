@@ -8,9 +8,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { red } from '@material-ui/core/colors';
-import { saveToken } from '../../action/LoginUtil';
-import { register_url } from '../../static/HttpConstant';
+import {saveToken} from '../../action/LoginUtil';
+import {register_url} from '../../static/HttpConstant';
 
 function Copyright() {
     return (
@@ -101,7 +100,7 @@ class SignUpComponent extends React.Component {
                 <CssBaseline/>
                 <div className={this.classes.paper}>
                 <div align="center" style={{marginBottom:"10px"}}>
-                <i class="fa fa-user-plus fa-2x" aria-hidden="true" align="center"></i> 
+                    <i class="fa fa-user-plus fa-2x" aria-hidden="true" align="center"/>
                 </div>
                     <Typography component="h1" variant="h5" style={{textAlign: "center"}}>
                         Coder注册

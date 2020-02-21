@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-02-18 09:31:23
  * @Description: Kingtous' Code
  */
-const BASE_URL = "http://192.168.0.104:5000/";
+const BASE_URL = "http://localhost:5000/";
 //--- API Definition---//
 // 认证
 const auth_url = BASE_URL + "auth/login";

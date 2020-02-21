@@ -21,19 +21,24 @@ function checkIsLogin() {
 //         "username": "Kingtous2"
 //     }
 // }
-function saveToken(data){
+function saveToken(data) {
     if (data.code == 0) {
         console.log("save token");
-        localStorage.setItem("token",data.data.token);
-        localStorage.setItem("username",data.data.username);
+        localStorage.setItem("token", data.data.token);
+        localStorage.setItem("username", data.data.username);
     } else {
         alert(data.code);
     }
 }
 
-function getUserCache(){
-    let arr = {"token":localStorage.getItem("token"),"username":localStorage.getItem("username")};
+function removeLoginState() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+}
+
+function getUserCache() {
+    let arr = {"token": localStorage.getItem("token"), "username": localStorage.getItem("username")};
     return arr;
 }
 
-export {checkIsLogin,saveToken,getUserCache};
+export {checkIsLogin, saveToken, getUserCache, removeLoginState};

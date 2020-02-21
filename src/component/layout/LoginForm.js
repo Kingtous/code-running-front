@@ -8,9 +8,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { red } from '@material-ui/core/colors';
-import { saveToken } from '../../action/LoginUtil';
-import { auth_url, getErrMessage } from '../../static/HttpConstant';
+import {saveToken} from '../../action/LoginUtil';
+import {auth_url} from '../../static/HttpConstant';
 import {withRouter} from "react-router-dom";
 
 function Copyright() {
@@ -42,13 +41,19 @@ class LoginForm extends React.Component {
         submit: {
             margin: theme.spacing(3, 0, 2),
         },
+        incorrectText: {
+            color: "red",
+            align: "right"
+        }
     }));
     username;
     password;
 
-    constructor(){
+    constructor() {
         super();
-       
+        this.state = {
+            hideIncorrect: true // 要弹出的错误提示语句
+        }
     }
 
     onUserNameChanged(e) {
@@ -77,7 +82,10 @@ class LoginForm extends React.Component {
                     saveToken(data);
                     this.props.history.push("/user/dashboard");
                 } else {
-                   getErrMessage(data.code);
+                    this.setState({
+                            hideIncorrect: false
+                        }
+                    );
                 }
             })
     }
@@ -87,9 +95,9 @@ class LoginForm extends React.Component {
             <Container component="main" maxWidth="xs" style={{padding: "50px"}}>
                 <CssBaseline/>
                 <div className={this.classes.paper}>
-                <div align="center" style={{marginBottom:"10px"}}>
-                <i class="fa fa-user fa-2x" aria-hidden="true" align="center"></i> 
-                </div>
+                    <div align="center" style={{marginBottom: "10px"}}>
+                        <i class="fa fa-user fa-2x" aria-hidden="true" align="center"/>
+                    </div>
                     <Typography component="h1" variant="h5" style={{textAlign: "center"}}>
                         Coder登录
                     </Typography>
@@ -122,7 +130,14 @@ class LoginForm extends React.Component {
                                         onChange={(e) => this.onPasswordChanged(e)}
                                     />
                                 </Grid>
-                            
+
+                            </Grid>
+                            <Grid container space={2}>
+                                <Grid item xs={12}>
+                                    <p style={{color: "red", textAlign: "right"}} hidden={this.state.hideIncorrect}>
+                                        账号或密码不正确
+                                    </p>
+                                </Grid>
                             </Grid>
                             <Button
                                 type="button"
@@ -147,7 +162,6 @@ class LoginForm extends React.Component {
                             </Grid>
                         </form>
                     </Container>
-
                 </div>
                 <Box mt={5}>
                     <Copyright/>
@@ -155,7 +169,7 @@ class LoginForm extends React.Component {
             </Container>
         );
     }
-    
+
 }
 
 export default withRouter(LoginForm);
