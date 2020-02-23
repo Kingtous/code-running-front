@@ -78,6 +78,7 @@ class LoginForm extends React.Component {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                // eslint-disable-next-line
                 if (data.code == 0) {
                     saveToken(data);
                     this.props.history.push("/user/dashboard");

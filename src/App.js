@@ -11,6 +11,7 @@ import MyRoute from "./router/Router.js";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 
 //生成https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=2196F3&secondary.color=7986CB
+// 全局主题配置
 const theme = createMuiTheme({
         palette: {
             primary: {
@@ -26,13 +27,30 @@ const theme = createMuiTheme({
                 contrastText: "#ffffff"
             },
         },
-        props: {
-            MuiContainer: {
-                root: {
-                    padding_left: "0px",
-
+    overrides: {
+        MuiContainer: {
+            root: {
+                paddingLeft: "0px",
+                paddingRight: "0px",
+                "@media (min-width: 600px)": {
+                    paddingLeft: "0px",
+                    paddingRight: "0px"
+                },
+                flex: 1,
+                backgroundSize: "cover",
+            },
+            maxWidthLg: {
+                "@media (min-width: 1280px)": {
+                    maxWidth: "100%"
+                }
+            },
+            maxWidthXs: {
+                maxWidth: "600px",
+                "@media (min-width: 0px)": {
+                    maxWidth: "600px"
                 }
             }
+        }
         }
     }
 );

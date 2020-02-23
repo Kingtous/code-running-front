@@ -10,15 +10,9 @@ import {checkIsLogin} from "../../action/LoginUtil";
 import {Container, Paper} from "@material-ui/core";
 import CodeToolBar from "../../component/layout/ToolBar";
 // 背景图
-import BackGround from "../../images/main_bg.jpg";
 import Grid from "@material-ui/core/Grid";
 import {SignUpComponent} from "../../component/layout/SignUp";
-
-const backGroundStyle = {
-    width: "100%",
-    height: "800px",
-    backgroundImage: `url(${BackGround})`
-};
+import RandomBackGroundStyle from "../../component/layout/Background";
 
 export default class RegisterPage extends React.Component {
 
@@ -35,28 +29,26 @@ export default class RegisterPage extends React.Component {
 
     render() {
         return (
-            <Container style={{display: 'flex', alignItems: 'center', margin: 0, justifyContent: "center"}}>
-                <div style={backGroundStyle}>
-                    <CodeToolBar/>
-                    <Container style={{flex: 1, alignItems: 'center', display: 'flex'}}
+            <Container>
+                <CodeToolBar/>
+                <Container style={RandomBackGroundStyle()}
+                >
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{minHeight: '100vh'}}
                     >
-                        <Grid
-                            container
-                            spacing={0}
-                            direction="column"
-                            alignItems="center"
-                            justify="center"
-                            style={{minHeight: '100vh'}}
-                        >
-                            <Grid item xs={8}>
-                                <Paper elevation={3}>
-                                    <SignUpComponent/>
-                                </Paper>
-                            </Grid>
+                        <Grid item xs={12}>
+                            <Paper elevation={3}>
+                                <SignUpComponent/>
+                            </Paper>
+                        </Grid>
                         </Grid>
 
                     </Container>
-                </div>
 
             </Container>
         );
