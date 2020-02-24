@@ -161,9 +161,11 @@ const styles = {
     },
 };
 
+
 function Paperbase(props) {
     const {classes} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [page, setPage] = React.useState(0);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

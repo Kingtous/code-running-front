@@ -115,7 +115,7 @@ class CodeToolBar extends Component {
 
     render() {
         return (
-            <AppBar position={"static"} style={{top: 0, left: 0, margin: 0}}>
+            <AppBar position={"static"} style={{top: 0, left: 0, margin: 0, opacity: 0.8}}>
                 <Toolbar>
                     <IconButton edge={"start"} className={this.classes.menuButton} color="inherit" aria-label="menu"
                                 onClick={this.handleMenuBtnClick}

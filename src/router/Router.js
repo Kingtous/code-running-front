@@ -10,6 +10,7 @@ import RegisterPage from "../page/business/register";
 import LoginPage from "../page/business/login";
 import {CssBaseline} from "@material-ui/core";
 import Paperbase from "../component/layout/Paperbase";
+import CodePage from "../page/business/code";
 
 export default function MyRoute() {
     // 定义路由
@@ -22,6 +23,7 @@ export default function MyRoute() {
                     <Route path="/user/login"><LoginPage/></Route>
                     <Route path="/user/register"><RegisterPage/></Route>
                     <Route path="/user/dashboard"><Paperbase/></Route>
+                    <Route path={"/code/write"}><CodePage/></Route>
                 </Switch>
             </div>
         </Router>
