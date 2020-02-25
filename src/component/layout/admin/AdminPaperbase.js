@@ -5,10 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import Navigator from './Navigator';
-import Content from './Content';
-import Header from './Header';
-import CodePage from "../../page/business/code";
+import Navigator from '../Navigator';
+import Content from '../Content';
+import Header from '../Header';
 
 function Copyright() {
     return (
@@ -153,7 +152,7 @@ const styles = {
     },
     main: {
         flex: 1,
-        padding: theme.spacing(2, 2),
+        padding: theme.spacing(6, 4),
         background: '#eaeff1',
     },
     footer: {
@@ -163,11 +162,10 @@ const styles = {
 };
 
 
-function Paperbase(props) {
+function AdminPaperbase(props) {
     const {classes} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
-    const [title, setTitle] = React.useState("我的主页");
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -175,9 +173,6 @@ function Paperbase(props) {
 
     const changePage = (pageNum) => {
         setPage(pageNum);
-    };
-    const changeTitle = (txt) => {
-        setTitle(txt);
     };
 
     return (
@@ -190,26 +185,20 @@ function Paperbase(props) {
                             PaperProps={{style: {width: drawerWidth}}}
                             changePage={changePage}
                             page={page} //value从0开始
-                            changeTitle={changeTitle}
+
                             variant="temporary"
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
                         />
                     </Hidden>
                     <Hidden xsDown implementation="css">
-                        <Navigator
-                            PaperProps={{style: {width: drawerWidth}}}
-                            changePage={changePage}
-                            changeTitle={changeTitle}
-                            page={page} //value从0开始
-                        />
+                        <Navigator PaperProps={{style: {width: drawerWidth}}}/>
                     </Hidden>
                 </nav>
                 <div className={classes.app}>
-                    <Header onDrawerToggle={handleDrawerToggle} title={title}/>
+                    <Header onDrawerToggle={handleDrawerToggle}/>
                     <main className={classes.main}>
-                        {page === 0 && <Content/>}
-                        {page === 3 && <CodePage/>}
+                        <Content/>
                     </main>
                     <footer className={classes.footer}>
                         <Copyright/>
@@ -220,9 +209,9 @@ function Paperbase(props) {
     );
 }
 
-Paperbase.propTypes = {
+AdminPaperbase.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Paperbase);
+export default withStyles(styles)(AdminPaperbase);
 

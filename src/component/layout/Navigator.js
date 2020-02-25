@@ -8,7 +8,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {Edit, Looks, OpenInBrowser, Search} from '@material-ui/icons';
+import {Category, CategoryRounded, Edit, Looks, OpenInBrowser, Search, Store} from '@material-ui/icons';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import TimerIcon from '@material-ui/icons/Timer';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -16,38 +16,7 @@ import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import Button from "@material-ui/core/Button";
 import {removeLoginState} from "../../action/LoginUtil";
 import withRouter from "react-router-dom/es/withRouter";
-
-const categories = [
-  {
-    id: '个人简介',
-    children: [
-      {id: '我的主页', icon: <EmojiPeopleIcon/>, active: true},
-      {id: '我的资料', icon: <OpenInBrowser/>, active: true},
-    ],
-  },
-  {
-    id: '创作专区',
-    children: [
-      {id: '我的代码', icon: <Looks/>},
-      {id: '编写代码', icon: <Edit/>},
-    ],
-  },
-  {
-    id: '广场',
-    children: [
-      {id: '最新帖子', icon: <SettingsIcon/>},
-      {id: '搜索帖子', icon: <Search/>},
-      {id: '发布帖子', icon: <TimerIcon/>},
-    ],
-  },
-  {
-    id: '我的活动',
-    children: [
-      {id: '我的帖子', icon: <TimerIcon/>},
-      {id: '我的关注', icon: <PhonelinkSetupIcon/>},
-    ],
-  },
-];
+import PubSub from 'pubsub-js';
 
 const styles = theme => ({
   categoryHeader: {
@@ -96,7 +65,47 @@ function Navigator(props) {
   if (username == null) {
     props.history.replace("/");
   }
-  const date = new Date();
+  const [page, setPage] = React.useState(props.page);
+
+  const categories = [
+    {
+      id: '个人简介',
+      children: [
+        {id: '我的主页', icon: <EmojiPeopleIcon/>, active: page == 0, value: 0},
+        {id: '我的资料', icon: <OpenInBrowser/>, active: page == 1, value: 1},
+      ],
+    },
+    {
+      id: '创作专区',
+      children: [
+        {id: '我的代码', icon: <Looks/>, active: page == 2, value: 2},
+        {id: '编写代码', icon: <Edit/>, active: page == 3, value: 3},
+      ],
+    },
+    {
+      id: '广场',
+      children: [
+        {id: '最新帖子', icon: <SettingsIcon/>, active: page == 4, value: 4},
+        {id: '搜索帖子', icon: <Search/>, active: page == 5, value: 5},
+        {id: '发布帖子', icon: <TimerIcon/>, active: page == 6, value: 6},
+      ],
+    },
+    {
+      id: '我的活动',
+      children: [
+        {id: '我的帖子', icon: <TimerIcon/>, active: page == 7, value: 7},
+        {id: '我的关注', icon: <PhonelinkSetupIcon/>, active: page == 8, value: 8},
+      ],
+    },
+    {
+      id: '商店',
+      children: [
+        {id: '商店一览', icon: <Store/>, active: page == 9, value: 9},
+        {id: '我的商店', icon: <Category/>, active: page == 10, value: 10},
+        {id: '我买入的', icon: <CategoryRounded/>, active: page == 11, value: 11},
+      ],
+    },
+  ];
 
   const sentence = () => {
     let date = new Date();
@@ -119,10 +128,22 @@ function Navigator(props) {
     props.history.goBack();
   };
 
+  const handleGotoIndex = () => {
+    window.location.reload();
+  };
+
+  const handleMenuClick = (id, index) => {
+    setPage(index);
+    props.changePage(index);
+    // 发送广播
+    props.changeTitle(id);
+    PubSub.publish("changePage", id);
+  };
+
   return (
       <Drawer variant="permanent" {...other}>
         <List disablePadding>
-          <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
+          <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)} onClick={handleGotoIndex}>
             "码"上社区
           </ListItem>
           <ListItem className={clsx(classes.item, classes.itemCategory)}>
@@ -152,11 +173,12 @@ function Navigator(props) {
                     {id}
                   </ListItemText>
                 </ListItem>
-                {children.map(({id: childId, icon, active}) => (
+                {children.map(({id: childId, icon, active, value}) => (
                     <ListItem
                         key={childId}
                         button
                         className={clsx(classes.item, active && classes.itemActiveItem)}
+                        onClick={e => handleMenuClick(childId, value)}
                     >
                       <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
                       <ListItemText
