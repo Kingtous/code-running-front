@@ -10,6 +10,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {saveToken} from '../../action/LoginUtil';
 import {register_url} from '../../static/HttpConstant';
+import {HttpProxy} from "../../static/HttpProxy";
 
 function Copyright() {
     return (
@@ -44,10 +45,10 @@ class SignUpComponent extends React.Component {
     username;
     password;
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            isSame:true
+            isSame: true
         }
     }
 
@@ -60,38 +61,27 @@ class SignUpComponent extends React.Component {
     }
 
     submit() {
-        let body = {"username": this.username, "password": this.password};
-        let initHeader = new Headers();
-        initHeader.append('Content-Type', 'application/json');
-        body = JSON.stringify(body);
-        const init = {
-            method: 'POST',
-            headers: initHeader,
-            body
-        };
-        fetch(register_url, init)
-            .then(res => res.json())
-            .then(data => {
-                if (data.code == 0) {
-                    saveToken(data);
-                } else {
-                    alert("存在同名用户了");
-                }
-            })
+        HttpProxy.register(this.username, this.password).then((data) => {
+            if (data.code === 0) {
+                saveToken(data);
+            } else {
+                alert("存在同名用户了");
+            }
+        })
     }
 
-    onRepeatPassword(event){
-            // 密码两遍不对
-            if(event.target.value == this.password){
-                this.setState({
-                    isSame : true
-                });
-            } else {
-                this.setState({
-                    isSame:false
-                })
-            }
-            
+    onRepeatPassword(event) {
+        // 密码两遍不对
+        if (event.target.value == this.password) {
+            this.setState({
+                isSame: true
+            });
+        } else {
+            this.setState({
+                isSame: false
+            })
+        }
+
     }
 
     render() {
@@ -99,9 +89,9 @@ class SignUpComponent extends React.Component {
             <Container component="main" maxWidth="xs" style={{padding: "50px"}}>
                 <CssBaseline/>
                 <div className={this.classes.paper}>
-                <div align="center" style={{marginBottom:"10px"}}>
-                    <i class="fa fa-user-plus fa-2x" aria-hidden="true" align="center"/>
-                </div>
+                    <div align="center" style={{marginBottom: "10px"}}>
+                        <i class="fa fa-user-plus fa-2x" aria-hidden="true" align="center"/>
+                    </div>
                     <Typography component="h1" variant="h5" style={{textAlign: "center"}}>
                         Coder注册
                     </Typography>
@@ -144,12 +134,12 @@ class SignUpComponent extends React.Component {
                                         type="password"
                                         id="rpassword"
                                         autoComplete="current-password"
-                                        onChange={(e)=>this.onRepeatPassword(e)}
+                                        onChange={(e) => this.onRepeatPassword(e)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <p align="right" style={{color:"red"}}
-                                    hidden={this.state.isSame}
+                                    <p align="right" style={{color: "red"}}
+                                       hidden={this.state.isSame}
                                     > 两次密码不一致 </p>
                                 </Grid>
                             </Grid>

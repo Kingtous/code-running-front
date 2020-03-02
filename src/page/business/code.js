@@ -12,6 +12,11 @@ import {BottomNavigation, Card, Container, Select, TextField} from "@material-ui
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 import {CloudUpload, Save, Work} from '@material-ui/icons';
+import {HttpProxy, upload} from "../../static/HttpProxy";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal);
 
 const mStyle = makeStyles(
     {
@@ -33,10 +38,9 @@ const codeKinds = {
 
 function CodePage() {
 
-    const [codeLanguageID, setCodeLanguageID] = React.useState(0);
-    const [fileName, setFileName] = React.useState(`Untitled.cpp`);
-    const [codeContent, setCodeContent] = React.useState("");
-
+    const [codeLanguageID, setCodeLanguageID] = React.useState(localStorage.getItem("temp_languageID") == null ? 0 : parseInt(localStorage.getItem("temp_languageID")));
+    const [fileName, setFileName] = React.useState(localStorage.getItem("temp_fileName") == null ? `Untitled.cpp` : localStorage.getItem("temp_fileName"));
+    const [codeContent, setCodeContent] = React.useState(localStorage.getItem("temp_content") == null ? "" : localStorage.getItem("temp_content"));
     const codemirrorOpts = {
         theme: 'monokai',
         keyMap: 'sublime',
@@ -62,10 +66,37 @@ function CodePage() {
 
     // 三个按钮
     const handleTempStore = (e) => {
-        // TODO
+        localStorage.setItem("temp_fileName", fileName);
+        localStorage.setItem("temp_content", codeContent);
+        localStorage.setItem("temp_languageID", codeLanguageID);
+        MySwal.fire(
+            "保存成功",
+            `代码已缓存`,
+            "success"
+        );
     };
     const handleStore = (e) => {
-        // TODO
+        HttpProxy.upload(fileName, codeContent).then((response) => {
+            // {
+            //     "code": 0,
+            //     "data": {
+            //     "url": "http://127.0.0.1:5000/uploaded/kingtous_10-12-31-006451_kingtous.py"
+            // }
+            // }
+            if (response.code === 0) {
+                MySwal.fire(
+                    "保存成功",
+                    `代码已保存至个人文件：<a href=${response.data.url}>链接</a>>`,
+                    "success"
+                );
+            } else {
+                MySwal.fire(
+                    "网络错误",
+                    `请稍后再试`,
+                    "failed"
+                );
+            }
+        });
     };
     const handleExecute = (e) => {
         // TODO

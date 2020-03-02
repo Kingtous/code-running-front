@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bc585a7-c90e-440e-a59f-063f3bb61fdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/component/layout/admin/AdminNavigator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/layout/admin/AdminPaperbase.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/HttpProxy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/layout/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/layout/Navigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/Navigator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/layout/Paperbase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/Paperbase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/layout/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/layout/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/business/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/business/code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/HttpConstant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/HttpConstant.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1XQjHRl1MjSR5o9JdKBaxhyHSq8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -177,8 +183,8 @@
       <screen x="0" y="23" width="1440" height="834" />
     </state>
     <state x="235" y="95" key="DiffContextDialog/0.23.1440.834@0.23.1440.834" timestamp="1582005564651" />
-    <state width="1899" height="135" key="GridCell.Tab.0.bottom" timestamp="1582600430880">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state width="1369" height="126" key="GridCell.Tab.0.bottom" timestamp="1583112656361">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state width="1419" height="103" key="GridCell.Tab.0.bottom/0.23.1440.834/1440.23.1020.741@0.23.1440.834" timestamp="1582291426402" />
     <state width="1095" height="94" key="GridCell.Tab.0.bottom/0.23.1440.834@0.23.1440.834" timestamp="1582029058636" />
@@ -187,8 +193,9 @@
     <state width="1379" height="152" key="GridCell.Tab.0.bottom/0.23.1680.871@0.23.1680.871" timestamp="1582360769197" />
     <state width="1899" height="135" key="GridCell.Tab.0.bottom/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582600430880" />
     <state width="1899" height="185" key="GridCell.Tab.0.bottom/0.23.1920.1010@0.23.1920.1010" timestamp="1582432019744" />
-    <state width="1899" height="135" key="GridCell.Tab.0.center" timestamp="1582600430879">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state width="1369" height="126" key="GridCell.Tab.0.bottom/40.23.1400.877@40.23.1400.877" timestamp="1583112656361" />
+    <state width="1369" height="126" key="GridCell.Tab.0.center" timestamp="1583112656360">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state width="1419" height="103" key="GridCell.Tab.0.center/0.23.1440.834/1440.23.1020.741@0.23.1440.834" timestamp="1582291426396" />
     <state width="1095" height="94" key="GridCell.Tab.0.center/0.23.1440.834@0.23.1440.834" timestamp="1582029058635" />
@@ -197,8 +204,9 @@
     <state width="1379" height="152" key="GridCell.Tab.0.center/0.23.1680.871@0.23.1680.871" timestamp="1582360769192" />
     <state width="1899" height="135" key="GridCell.Tab.0.center/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582600430879" />
     <state width="1899" height="185" key="GridCell.Tab.0.center/0.23.1920.1010@0.23.1920.1010" timestamp="1582432019743" />
-    <state width="1899" height="135" key="GridCell.Tab.0.left" timestamp="1582600430878">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state width="1369" height="126" key="GridCell.Tab.0.center/40.23.1400.877@40.23.1400.877" timestamp="1583112656360" />
+    <state width="1369" height="126" key="GridCell.Tab.0.left" timestamp="1583112656358">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state width="1419" height="103" key="GridCell.Tab.0.left/0.23.1440.834/1440.23.1020.741@0.23.1440.834" timestamp="1582291426391" />
     <state width="1095" height="94" key="GridCell.Tab.0.left/0.23.1440.834@0.23.1440.834" timestamp="1582029058635" />
@@ -207,8 +215,9 @@
     <state width="1379" height="152" key="GridCell.Tab.0.left/0.23.1680.871@0.23.1680.871" timestamp="1582360769191" />
     <state width="1899" height="135" key="GridCell.Tab.0.left/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582600430878" />
     <state width="1899" height="185" key="GridCell.Tab.0.left/0.23.1920.1010@0.23.1920.1010" timestamp="1582432019742" />
-    <state width="1899" height="135" key="GridCell.Tab.0.right" timestamp="1582600430879">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state width="1369" height="126" key="GridCell.Tab.0.left/40.23.1400.877@40.23.1400.877" timestamp="1583112656358" />
+    <state width="1369" height="126" key="GridCell.Tab.0.right" timestamp="1583112656361">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state width="1419" height="103" key="GridCell.Tab.0.right/0.23.1440.834/1440.23.1020.741@0.23.1440.834" timestamp="1582291426399" />
     <state width="1095" height="94" key="GridCell.Tab.0.right/0.23.1440.834@0.23.1440.834" timestamp="1582029058636" />
@@ -217,6 +226,7 @@
     <state width="1379" height="152" key="GridCell.Tab.0.right/0.23.1680.871@0.23.1680.871" timestamp="1582360769195" />
     <state width="1899" height="135" key="GridCell.Tab.0.right/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582600430879" />
     <state width="1899" height="185" key="GridCell.Tab.0.right/0.23.1920.1010@0.23.1920.1010" timestamp="1582432019743" />
+    <state width="1369" height="126" key="GridCell.Tab.0.right/40.23.1400.877@40.23.1400.877" timestamp="1583112656360" />
     <state width="1419" height="157" key="GridCell.Tab.1.bottom" timestamp="1581949300953">
       <screen x="0" y="23" width="1440" height="836" />
     </state>
@@ -265,11 +275,12 @@
       <screen x="0" y="23" width="1440" height="836" />
     </state>
     <state width="1419" height="157" key="GridCell.Tab.3.right/0.23.1440.836@0.23.1440.836" timestamp="1581949300956" />
-    <state x="433" y="99" key="SettingsEditor" timestamp="1582595809146">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state x="356" y="89" key="SettingsEditor" timestamp="1583114935187">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state x="325" y="86" key="SettingsEditor/0.23.1440.836@0.23.1440.836" timestamp="1581995637034" />
     <state x="433" y="99" key="SettingsEditor/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582595809146" />
+    <state x="356" y="89" key="SettingsEditor/40.23.1400.877@40.23.1400.877" timestamp="1583114935187" />
     <state x="548" y="213" key="Vcs.Push.Dialog.v2" timestamp="1582551388850">
       <screen x="0" y="23" width="1920" height="1010" />
     </state>
@@ -281,12 +292,13 @@
     </state>
     <state x="483" y="238" key="git4idea.merge.GitPullDialog/0.23.1440.834@0.23.1440.834" timestamp="1582271042477" />
     <state x="644" y="283" key="git4idea.merge.GitPullDialog/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582551384606" />
-    <state x="1231" y="217" width="894" height="192" key="search.everywhere.popup" timestamp="1582602641028">
-      <screen x="0" y="23" width="1920" height="1010" />
+    <state x="938" y="191" width="670" height="167" key="search.everywhere.popup" timestamp="1583120865640">
+      <screen x="40" y="23" width="1400" height="877" />
     </state>
     <state x="923" y="183" width="670" height="158" key="search.everywhere.popup/0.23.1440.834/1440.23.1020.741@0.23.1440.834" timestamp="1582295687735" />
     <state x="923" y="183" width="670" height="158" key="search.everywhere.popup/0.23.1440.834@0.23.1440.834" timestamp="1582026243083" />
     <state x="923" y="183" width="670" height="676" key="search.everywhere.popup/0.23.1440.836@0.23.1440.836" timestamp="1580985664628" />
     <state x="1231" y="217" width="894" height="192" key="search.everywhere.popup/0.23.1920.1010/-1920.23.1920.1057@0.23.1920.1010" timestamp="1582602641028" />
+    <state x="938" y="191" width="670" height="167" key="search.everywhere.popup/40.23.1400.877@40.23.1400.877" timestamp="1583120865640" />
   </component>
 </project>

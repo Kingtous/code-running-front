@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import {saveToken} from '../../action/LoginUtil';
 import {auth_url} from '../../static/HttpConstant';
 import {withRouter} from "react-router-dom";
+import {HttpProxy} from "../../static/HttpProxy";
 
 function Copyright() {
     return (
@@ -65,30 +66,19 @@ class LoginForm extends React.Component {
     }
 
     submit() {
-        let body = {"username": this.username, "password": this.password};
-        let initHeader = new Headers();
-        initHeader.append('Content-Type', 'application/json');
-        body = JSON.stringify(body);
-        const init = {
-            method: 'POST',
-            headers: initHeader,
-            body
-        };
-        fetch(auth_url, init)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                // eslint-disable-next-line
-                if (data.code == 0) {
-                    saveToken(data);
-                    this.props.history.push("/user/dashboard");
-                } else {
-                    this.setState({
-                            hideIncorrect: false
-                        }
-                    );
-                }
-            })
+        HttpProxy.login(this.username, this.password).then((data) => {
+            console.log(data);
+            // eslint-disable-next-line
+            if (data.code === 0) {
+                saveToken(data);
+                this.props.history.push("/user/dashboard");
+            } else {
+                this.setState({
+                        hideIncorrect: false
+                    }
+                );
+            }
+        });
     }
 
     render() {

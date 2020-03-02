@@ -5,6 +5,8 @@
  * @LastEditTime: 2020-02-18 09:31:23
  * @Description: Kingtous' Code
  */
+import Base64 from 'base-64';
+
 const BASE_URL = "http://localhost:5000/";
 //--- API Definition---//
 // 认证
@@ -26,14 +28,24 @@ const test_url = BASE_URL + "test?id=5";
 
 
 const err_reason = {
-    1003:"密码错误"
+    1003: "密码错误"
 };
 
-function getErrMessage(code){
+function getErrMessage(code) {
     return err_reason.code;
 }
 
-export {
+function getBasicAuthHeaderByToken() {
+    let token = localStorage.getItem("token");
+    let bToken = Base64.encode(token + ":");
+    return {"Authorization": "Basic " + bToken, 'Content-Type': 'application/json'};
+}
+
+const HttpConstants = {
     BASE_URL, auth_url, register_url, file_upload_url, file_get_url, exe_url,
-    get_all_code_rul, get_exe_result_rul, test_url,getErrMessage
+    get_all_code_rul, get_exe_result_rul, test_url
+};
+
+export {
+    HttpConstants, getErrMessage, getBasicAuthHeaderByToken
 };
