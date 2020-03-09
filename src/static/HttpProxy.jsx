@@ -28,7 +28,7 @@ async function login(username, password) {
 }
 
 async function getAllCodes() {
-    let response = await fetch(HttpConstants.get_all_code_rul, {
+    let response = await fetch(HttpConstants.get_all_code_url, {
         method: "GET",
         headers: getBasicAuthHeaderByToken(),
     });

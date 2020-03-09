@@ -9,6 +9,7 @@ import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
 import CodePage from "../../page/business/code";
+import MyCodePage from "../../page/business/myCode";
 
 function Copyright() {
     return (
@@ -209,6 +210,7 @@ function Paperbase(props) {
                     <Header onDrawerToggle={handleDrawerToggle} title={title}/>
                     <main className={classes.main}>
                         {page === 0 && <Content/>}
+                        {page === 2 && <MyCodePage/>}
                         {page === 3 && <CodePage/>}
                     </main>
                     <footer className={classes.footer}>
