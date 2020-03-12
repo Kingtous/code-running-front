@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Paper, Table, TableCell, TableRow} from "@material-ui/core";
-import {getBasicAuthHeaderByToken, HttpConstants} from "../../static/HttpConstant";
+import {getBasicAuthHeaderByToken,getToken, HttpConstants} from "../../static/HttpConstant";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Timestamp from 'react-timestamp';
@@ -34,8 +34,10 @@ export default function MyCodePage() {
         getCodes();
     }, []);
 
-    function handleDownload() {
-
+    function handleDownload(url) {
+        window.open(
+            url+"?token="+getToken(),'Download'
+        );
     }
 
     function handleEdit() {
@@ -79,7 +81,7 @@ export default function MyCodePage() {
                                                options={{includeDay: true, twentyFourHour: true}}/>
                                 </TableCell>
                                 <TableCell className={classes.tableCell} align={"center"}>
-                                    <Button onClick={handleDownload}>
+                                    <Button onClick={() => handleDownload(code.local_path)}>
                                         下载
                                     </Button>
                                     <Button onClick={handleEdit}>

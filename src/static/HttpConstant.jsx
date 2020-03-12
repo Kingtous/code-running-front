@@ -7,7 +7,7 @@
  */
 import Base64 from 'base-64';
 
-const BASE_URL = "http://192.168.0.101:5000/";
+const BASE_URL = "http://localhost:5000/";
 //--- API Definition---//
 // 认证
 const auth_url = BASE_URL + "auth/login";
@@ -35,6 +35,10 @@ function getErrMessage(code) {
     return err_reason.code;
 }
 
+function getToken(){
+    return localStorage.getItem("token");
+}
+
 function getBasicAuthHeaderByToken() {
     let token = localStorage.getItem("token");
     let bToken = Base64.encode(token + ":");
@@ -47,5 +51,5 @@ const HttpConstants = {
 };
 
 export {
-    HttpConstants, getErrMessage, getBasicAuthHeaderByToken
+    HttpConstants, getErrMessage, getBasicAuthHeaderByToken,getToken
 };

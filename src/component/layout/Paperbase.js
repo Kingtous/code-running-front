@@ -10,6 +10,7 @@ import Content from './Content';
 import Header from './Header';
 import CodePage from "../../page/business/code";
 import MyCodePage from "../../page/business/myCode";
+import MyProfilePage from "../../page/business/profile.js";
 
 function Copyright() {
     return (
@@ -167,7 +168,7 @@ const styles = {
 function Paperbase(props) {
     const {classes} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = React.useState(1);
     const [title, setTitle] = React.useState("我的主页");
 
     const handleDrawerToggle = () => {
@@ -210,6 +211,7 @@ function Paperbase(props) {
                     <Header onDrawerToggle={handleDrawerToggle} title={title}/>
                     <main className={classes.main}>
                         {page === 0 && <Content/>}
+                        {page === 1 && <MyProfilePage/>}
                         {page === 2 && <MyCodePage/>}
                         {page === 3 && <CodePage/>}
                     </main>
