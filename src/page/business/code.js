@@ -1,20 +1,26 @@
 /// 编写代码
 
 import React from 'react'
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import CodeMirror from "@uiw/react-codemirror";
 import 'codemirror/keymap/sublime';
-import 'codemirror/theme/monokai.css';
+import 'codemirror/theme/solarized.css';
 // 代码种类
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/clike/clike';
-import {BottomNavigation, Card, Container, Select, TextField} from "@material-ui/core";
+import { BottomNavigation, Card, Container, Select, TextField } from "@material-ui/core";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
-import {CloudUpload, Save, Work,Looks} from '@material-ui/icons';
-import {HttpProxy, upload} from "../../static/HttpProxy";
+import { CloudUpload, Save, Work, Looks } from '@material-ui/icons';
+import { HttpProxy, upload } from "../../static/HttpProxy";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { Layout, Input, Row, Col, Menu, Dropdown, Button } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
+
+const { Header, Footer, Sider, Content } = Layout;
+
 
 const MySwal = withReactContent(Swal);
 
@@ -42,7 +48,7 @@ function CodePage() {
     const [fileName, setFileName] = React.useState(localStorage.getItem("temp_fileName") == null ? `Untitled.cpp` : localStorage.getItem("temp_fileName"));
     const [codeContent, setCodeContent] = React.useState(localStorage.getItem("temp_content") == null ? "" : localStorage.getItem("temp_content"));
     const codemirrorOpts = {
-        theme: 'monokai',
+        theme: 'solarized light',
         keyMap: 'sublime',
         mode: codeKinds[codeLanguageID],
         autofocus: true,
@@ -60,8 +66,8 @@ function CodePage() {
     const handleFileNameChanged = (e) => {
         setFileName(e.target.value);
     };
-    const handleLanguageChanged = (e) => {
-        setCodeLanguageID(e.target.value);
+    const handleLanguageChanged = (id) => {
+        setCodeLanguageID(id);
     };
 
     // 三个按钮
@@ -102,44 +108,58 @@ function CodePage() {
         // TODO
     };
 
+    const languageText = (
+        <Menu onClick={handleLanguageChanged}>
+            <Menu.Item key={0}><a></a>C++ (C++17)</Menu.Item>
+            <Menu.Item key={1}>Java (JDK1.8)</Menu.Item>
+            <Menu.Item key={2}>Python (Pure 3.6)</Menu.Item>
+        </Menu>
+    );
+
 
     return (
-        <Container>
-            <Container>
-                <TextField id="outlined-basic" label="文件名" variant="outlined" defaultValue={fileName} style={mStyle.tf}
-                           onChange={event => handleFileNameChanged(event)}/>
+        <Layout>
+            <Content>
 
-                <Select onChange={event => {
-                    handleLanguageChanged(event)
-                }} value={codeLanguageID}>
-                    <option value={0} selected={true}>C++ (C++17)</option>
-                    <option value={1}>Java (JDK1.8)</option>
-                    <option value={2}>Python (Pure 3.6)</option>
-                </Select>
-            </Container>
+                <Row>
+                    <Col span={18}>
+                        <Input placeholder="文件名" defaultValue={fileName} style={mStyle.tf}
+                            onChange={event => handleFileNameChanged(event)} />
+                    </Col>
+                    <Col span={6}>
+                        {/* <Dropdown overlay={languageText}>
+                            <Button>
+                            Button <DownOutlined />
+                            </Button>
+                        </Dropdown> */}
+                    </Col>
+                </Row>
+                <CodeMirror
+                    options={codemirrorOpts}
+                    value={codeContent}
+                    onChange={(instance, change) => onCodeChanged(instance, change)}
+                />
+            </Content>
 
-            <CodeMirror
-                options={codemirrorOpts}
-                height={800}
-                value={codeContent}
-                onChange={(instance, change) => onCodeChanged(instance, change)}
-            />
-
-            <Card
-                style={mStyle.actions}
-            >
-                <BottomNavigation
-                    onChange={(event, newValue) => {
-                        onBtnClicked(newValue)
-                    }}
-                    showLabels
+            <Footer>
+                <Card
+                    style={mStyle.actions}
                 >
-                    <BottomNavigationAction label="临时保存" icon={<Save/>} onClick={event => handleTempStore(event)}/>
-                    <BottomNavigationAction label="保存到云端" icon={<CloudUpload/>} onClick={event => handleStore(event)}/>
-                    <BottomNavigationAction label="执行" icon={<Work/>} onClick={event => handleExecute(event)}/>
-                </BottomNavigation>
-            </Card>
-        </Container>
+                    <BottomNavigation
+                        onChange={(event, newValue) => {
+                            onBtnClicked(newValue)
+                        }}
+                        showLabels
+                    >
+                        <BottomNavigationAction label="临时保存" icon={<Save />} onClick={event => handleTempStore(event)} />
+                        <BottomNavigationAction label="保存到云端" icon={<CloudUpload />} onClick={event => handleStore(event)} />
+                        <BottomNavigationAction label="执行" icon={<Work />} onClick={event => handleExecute(event)} />
+                    </BottomNavigation>
+                </Card>
+            </Footer>
+
+
+        </Layout>
     );
 }
 

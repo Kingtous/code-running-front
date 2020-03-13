@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "@uiw/react-codemirror": "^2.2.1",
+    "antd": "^4.0.2",
     "base-64": "^0.1.0",
     "clsx": "latest",
     "lottie-web": "^5.6.4",

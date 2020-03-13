@@ -11,7 +11,7 @@ import Header from './Header';
 import CodePage from "../../page/business/code";
 import MyCodePage from "../../page/business/myCode";
 import MyProfilePage from "../../page/business/profile.js";
-import myThreads from '../../page/myThreads';
+import MyThreads from '../../page/myThreads.js';
 
 function Copyright() {
     return (
@@ -169,7 +169,7 @@ const styles = {
 function Paperbase(props) {
     const {classes} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = React.useState(3);
     const [title, setTitle] = React.useState("我的主页");
 
     const handleDrawerToggle = () => {
@@ -209,13 +209,13 @@ function Paperbase(props) {
                     </Hidden>
                 </nav>
                 <div className={classes.app}>
-                    <Header onDrawerToggle={handleDrawerToggle} title={title}/>
+                    {/* <Header onDrawerToggle={handleDrawerToggle} title={title}/> */}
                     <main className={classes.main}>
                         {page === 0 && <Content/>}
                         {page === 1 && <MyProfilePage/>}
                         {page === 2 && <MyCodePage/>}
                         {page === 3 && <CodePage/>}
-                        {page === 7 && <myThreads/>}
+                        {page === 7 && <MyThreads/>}
                     </main>
                     <footer className={classes.footer}>
                         <Copyright/>
