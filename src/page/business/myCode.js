@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
-import {Paper, Table, TableCell, TableRow} from "@material-ui/core";
-import {getBasicAuthHeaderByToken,getToken, HttpConstants} from "../../static/HttpConstant";
-import {makeStyles} from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { Paper, Table, TableCell, TableRow, Typography } from "@material-ui/core";
+import { getBasicAuthHeaderByToken, getToken, HttpConstants } from "../../static/HttpConstant";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Timestamp from 'react-timestamp';
-
+import { withStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(
     {
@@ -36,15 +36,19 @@ export default function MyCodePage() {
 
     function handleDownload(url) {
         window.open(
-            url+"?token="+getToken(),'Download'
+            url + "?token=" + getToken(), 'Download'
         );
     }
 
-    function handleEdit() {
+    function handleEdit(id) {
 
     }
 
-    function handleDelete() {
+    function handleDelete(id) {
+
+    }
+
+    function handleRun(id){
 
     }
 
@@ -66,6 +70,9 @@ export default function MyCodePage() {
                         <TableCell className={classes.tableCell} align={"center"}>
                             操作
                         </TableCell>
+                        <TableCell className={classes.tableCell} align={"center"}>
+                            执行情况
+                        </TableCell>
                     </TableRow>
                     {codes.map((code) => {
                         return (
@@ -78,18 +85,31 @@ export default function MyCodePage() {
                                 </TableCell>
                                 <TableCell className={classes.tableCell} align={"center"}>
                                     <Timestamp date={code.create_date} relative
-                                               options={{includeDay: true, twentyFourHour: true}}/>
+                                        options={{ includeDay: true, twentyFourHour: true }} />
                                 </TableCell>
                                 <TableCell className={classes.tableCell} align={"center"}>
                                     <Button onClick={() => handleDownload(code.local_path)}>
                                         下载
                                     </Button>
-                                    <Button onClick={handleEdit}>
+                                    <Button onClick={() => handleRun(code.id)}>
+                                        执行
+                                    </Button>
+                                    <Button onClick={() =>handleEdit(code.id)}>
                                         编辑
                                     </Button>
-                                    <Button onClick={handleDelete}>
+                                    <Button onClick={() =>handleDelete(code.id)}>
                                         删除
                                     </Button>
+                                </TableCell>
+                                <TableCell className={classes.tableCell} align={"center"}>
+                                    {code.isExe ?
+                                        <Button onClick={() => handleDownload(code.local_path)} disable>
+                                            查看执行结果
+                                </Button> :
+                                        <Typography color="secondary">
+                                            还未执行
+                                        </Typography>
+                                    }
                                 </TableCell>
                             </TableRow>
                         );

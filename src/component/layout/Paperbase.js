@@ -11,6 +11,7 @@ import Header from './Header';
 import CodePage from "../../page/business/code";
 import MyCodePage from "../../page/business/myCode";
 import MyProfilePage from "../../page/business/profile.js";
+import myThreads from '../../page/myThreads';
 
 function Copyright() {
     return (
@@ -214,6 +215,7 @@ function Paperbase(props) {
                         {page === 1 && <MyProfilePage/>}
                         {page === 2 && <MyCodePage/>}
                         {page === 3 && <CodePage/>}
+                        {page === 7 && <myThreads/>}
                     </main>
                     <footer className={classes.footer}>
                         <Copyright/>

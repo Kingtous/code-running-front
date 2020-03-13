@@ -2,14 +2,14 @@
  * @Author: Kingtous
  * @Date: 2020-02-18 09:07:27
  * @LastEditors: Kingtous
- * @LastEditTime: 2020-02-18 10:34:47
+ * @LastEditTime: 2020-03-13 09:58:38
  * @Description: Kingtous' Code
  */
 
 
 function checkIsLogin() {
     let token = localStorage.getItem("token");
-    console.log("token为："+token);
+    console.log("token为：" + token);
     return token != null;
 }
 
@@ -37,8 +37,16 @@ function removeLoginState() {
 }
 
 function getUserCache() {
-    let arr = {"token": localStorage.getItem("token"), "username": localStorage.getItem("username")};
+    let arr = {
+        "token": localStorage.getItem("token"),
+        "username": localStorage.getItem("username")
+    };
     return arr;
 }
 
-export {checkIsLogin, saveToken, getUserCache, removeLoginState};
+export {
+    checkIsLogin,
+    saveToken,
+    getUserCache,
+    removeLoginState
+};
